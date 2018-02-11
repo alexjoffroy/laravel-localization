@@ -1,0 +1,55 @@
+{
+    "name": "alexjoffroy/laravel-localization",
+    "description": "A Laravel package to handle localization with ease",
+    "keywords": [
+        "alexjoffroy",
+        "laravel-localization",
+        "laravel",
+        "localization",
+        "php"
+    ],
+    "homepage": "https://github.com/alexjoffroy/laravel-localization",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alex Joffroy",
+            "email": "hello@alexjoffroy.me",
+            "homepage": "https://alexjoffroy.me",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AlexJoffroy\\LaravelLocalization\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AlexJoffroy\\LaravelLocalization\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AlexJoffroy\\LaravelLocalization\\Providers\\LocalizationServiceProvider"
+            ],
+            "aliases": {
+                "LaravelLocalization": "AlexJoffroy\\LaravelLocalization\\Facades\\Localization"
+            }
+        }
+    }
+}
