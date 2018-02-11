@@ -17,6 +17,8 @@ class LocalizationManagerTest extends TestCase
         parent::setUp();
 
         $this->config = $this->app['config'];
+        $this->config->set('app.locale', 'en');
+        
         $this->localization = $this->app['localization'];
     }
 
@@ -29,18 +31,23 @@ class LocalizationManagerTest extends TestCase
     /** @test */
     public function it_can_get_the_current_locale()
     {
-        $this->config->set('app.locale', 'en');
-        
         $this->assertEquals($this->localization->getLocale(), 'en');
     }
 
     /** @test */
     public function it_can_set_the_current_locale()
     {
-        $this->config->set('app.locale', 'en');
-
+        $this->assertEquals($this->localization->getLocale(), 'en');
+        
         $this->localization->setLocale('fr');
 
         $this->assertEquals($this->localization->getLocale(), 'fr');
+    }
+
+    /** @test */
+    public function it_can_check_if_a_locale_is_the_current_one()
+    {
+        $this->assertTrue($this->localization->isCurrentLocale('en'));
+        $this->assertFalse($this->localization->isCurrentLocale('fr'));
     }
 }

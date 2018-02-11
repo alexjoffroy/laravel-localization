@@ -23,4 +23,9 @@ class LocalizationManager
     {
         return $this->app->setLocale($locale);
     }
+
+    public function isCurrentLocale(string $locale = ''): bool
+    {
+        return $locale === $this->getLocale();
+    }
 }
