@@ -3,6 +3,7 @@
 namespace AlexJoffroy\LaravelLocalization\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use AlexJoffroy\LaravelLocalization\LocalizationManager;
 
 class LocalizationServiceProvider extends ServiceProvider
 {
@@ -12,5 +13,8 @@ class LocalizationServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->app->singleton('localization', function () {
+            return new LocalizationManager($this->app);
+        });
     }
 }
