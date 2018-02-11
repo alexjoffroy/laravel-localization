@@ -2,6 +2,8 @@
 
 namespace AlexJoffroy\LaravelLocalization\Tests;
 
+use AlexJoffroy\LaravelLocalization\LocalizationManager;
+
 class LocalizationManagerTest extends TestCase
 {
     /** @var \Illuminate\Contracts\Config\Repository */
@@ -16,6 +18,12 @@ class LocalizationManagerTest extends TestCase
 
         $this->config = $this->app['config'];
         $this->localization = $this->app['localization'];
+    }
+
+    /** @test */
+    public function it_can_resolve_the_localization_manager()
+    {
+        $this->assertTrue($this->localization instanceof LocalizationManager);
     }
 
     /** @test */
