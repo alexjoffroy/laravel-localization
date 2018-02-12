@@ -54,4 +54,9 @@ class LocalizationManager
     {
         return $this->app['config']->get('localization.default_locale');
     }
+
+    public function isDefaultLocale(string $locale = ''): bool
+    {
+        return $locale === $this->getDefaultLocale();
+    }
 }

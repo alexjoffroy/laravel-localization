@@ -89,4 +89,14 @@ class LocalizationManagerTest extends TestCase
 
         $this->assertEquals($default, $this->localization->getDefaultLocale());
     }
+
+    /** @test */
+    public function it_can_check_if_a_locale_is_the_default_one()
+    {
+        $default = 'en';
+        $this->config->set('localization.default_locale', $default);
+
+        $this->assertTrue($this->localization->isDefaultLocale('en'));
+        $this->assertFalse($this->localization->isDefaultLocale('fr'));
+    }
 }
