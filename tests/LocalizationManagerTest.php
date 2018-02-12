@@ -11,6 +11,11 @@ class LocalizationManagerTest extends TestCase
 
     /** @var \AlexJoffroy\LaravelLocalization\LocalizationManager */
     protected $localization;
+    
+    protected $locales = [
+        'en' => ['native' => 'English'],
+        'fr' => ['native' => 'Français'],
+    ];
 
     protected function setUp()
     {
@@ -50,28 +55,29 @@ class LocalizationManagerTest extends TestCase
         $this->assertTrue($this->localization->isCurrentLocale('en'));
         $this->assertFalse($this->localization->isCurrentLocale('fr'));
     }
-
+    
     /** @test */
     public function it_can_get_the_supported_locales()
     {
-        $locales = [
-            'en' => ['native' => 'English'],
-            'fr' => ['native' => 'Français'],
-        ];
-        $this->config->set('localization.supported_locales', $locales);
+        $this->config->set('localization.supported_locales', $this->locales);
 
-        $this->assertEquals(collect($locales), $this->localization->getSupportedLocales());
+        $this->assertEquals(collect($this->locales), $this->localization->getSupportedLocales());
     }
 
     /** @test */
     public function it_can_get_the_supported_locales_keys()
     {
-        $locales = [
-            'en' => ['native' => 'English'],
-            'fr' => ['native' => 'Français'],
-        ];
-        $this->config->set('localization.supported_locales', $locales);
+        $this->config->set('localization.supported_locales', $this->locales);
 
-        $this->assertEquals(collect($locales)->keys(), $this->localization->getSupportedLocalesKeys());
+        $this->assertEquals(collect($this->locales)->keys(), $this->localization->getSupportedLocalesKeys());
+    }
+
+    /** @test */
+    public function it_can_check_if_a_locale_is_supported()
+    {
+        $this->config->set('localization.supported_locales', $this->locales);
+        
+        $this->assertTrue($this->localization->isSupportedLocale('en'));
+        $this->assertFalse($this->localization->isSupportedLocale('es'));
     }
 }

@@ -44,4 +44,9 @@ class LocalizationManager
     {
         return $this->getSupportedLocales()->keys();
     }
+
+    public function isSupportedLocale(string $locale = ''): bool
+    {
+        return $this->getSupportedLocales()->has($locale);
+    }
 }
