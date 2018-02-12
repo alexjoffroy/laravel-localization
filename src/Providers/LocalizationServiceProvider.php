@@ -16,5 +16,8 @@ class LocalizationServiceProvider extends ServiceProvider
         $this->app->singleton('localization', function () {
             return new LocalizationManager($this->app);
         });
+
+        $this->app['router']->macro('locales', function (Closure $closure) {
+        });
     }
 }
