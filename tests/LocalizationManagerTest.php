@@ -50,4 +50,28 @@ class LocalizationManagerTest extends TestCase
         $this->assertTrue($this->localization->isCurrentLocale('en'));
         $this->assertFalse($this->localization->isCurrentLocale('fr'));
     }
+
+    /** @test */
+    public function it_can_get_the_supported_locales()
+    {
+        $locales = [
+            'en' => ['native' => 'English'],
+            'fr' => ['native' => 'Français'],
+        ];
+        $this->config->set('localization.supported_locales', $locales);
+
+        $this->assertEquals(collect($locales), $this->localization->getSupportedLocales());
+    }
+
+    /** @test */
+    public function it_can_get_the_supported_locales_keys()
+    {
+        $locales = [
+            'en' => ['native' => 'English'],
+            'fr' => ['native' => 'Français'],
+        ];
+        $this->config->set('localization.supported_locales', $locales);
+
+        $this->assertEquals(collect($locales)->keys(), $this->localization->getSupportedLocalesKeys());
+    }
 }

@@ -28,4 +28,20 @@ class LocalizationManager
     {
         return $locale === $this->getLocale();
     }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getSupportedLocales()
+    {
+        return collect($this->app['config']->get('localization.supported_locales'));
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getSupportedLocalesKeys()
+    {
+        return $this->getSupportedLocales()->keys();
+    }
 }
