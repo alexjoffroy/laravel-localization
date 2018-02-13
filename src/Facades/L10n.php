@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @see \AlexJoffroy\LaravelLocalization\LocalizationManager
  */
-class Localization extends Facade
+class L10n extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
