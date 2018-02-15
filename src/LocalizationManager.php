@@ -72,7 +72,7 @@ class LocalizationManager
         $localesPattern = $this->getSupportedLocalesKeys()->implode('|');
         $name = preg_replace("/^($localesPattern)\./", '', $name);
 
-        return $this->app['url']->route("$locale.$name", $parameters, $absolute);
+        return $this->app->url->route("$locale.$name", $parameters, $absolute);
     }
 
     public function currentRoute(string $locale, bool $absolute = true): string
