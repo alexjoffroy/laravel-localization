@@ -6,31 +6,10 @@ use AlexJoffroy\LaravelLocalization\LocalizationManager;
 
 class LocalizationManagerTest extends TestCase
 {
-    /** @var \Illuminate\Contracts\Config\Repository */
-    protected $config;
-
-    /** @var \AlexJoffroy\LaravelLocalization\LocalizationManager */
-    protected $localization;
-
-    protected $locales = [
-        'en' => ['native' => 'English'],
-        'fr' => ['native' => 'Français'],
-    ];
-
     protected function setUp()
     {
         parent::setUp();
         
-        $this->localization = $this->app['localization'];
-        $this->app->setLocale('en');
-
-        $this->app['config']->set([
-            'localization.supported_locales' => $this->locales,
-            'localization.default_locale' => 'en'
-        ]);
-        $this->app['translator']->addLines(['routes.posts' => 'posts'], 'en');
-        $this->app['translator']->addLines(['routes.posts' => 'articles'], 'fr');
-
         $router = $this->app['router'];
         $router->locales(function () use ($router) {
             $router->get(trans('routes.posts') . "/{id}", [
