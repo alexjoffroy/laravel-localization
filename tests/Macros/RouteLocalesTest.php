@@ -1,10 +1,11 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Tests;
+namespace AlexJoffroy\LaravelLocalization\Tests\Macros;
 
+use AlexJoffroy\LaravelLocalization\Tests\TestCase;
 use AlexJoffroy\LaravelLocalization\LocalizationManager;
 
-class RouteLocalesMacroTest extends TestCase
+class RouteLocalesTest extends TestCase
 {
     /** @test */
     public function it_registers_the_locales_macro_on_router()

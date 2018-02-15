@@ -14,26 +14,13 @@ class LocalizationServiceProvider extends ServiceProvider
             return new LocalizationManager($this->app);
         });
 
-        $this->registerRouteLocalesMacro();
+        $this->registerMacros();
     }
 
-    public function registerRouteLocalesMacro()
+    public function registerMacros()
     {
-        $router = $this->app['router'];
-        $l10n = $this->app['localization'];
-        $router->macro('locales', function (Closure $closure) use ($router, $l10n) {
-            $locales = $l10n->getSupportedLocalesKeys();
-            $currentLocale = $l10n->getLocale();
-            foreach ($locales as $locale) {
-                $l10n->setLocale($locale);
-                $router->group([
-                    'as' => "$locale.",
-                    'prefix' => $locale,
-                ], function () use ($closure) {
-                    $closure();
-                });
-            }
-            $l10n->setLocale($currentLocale);
-        });
+        if (!$this->app['router']->hasMacro('locales')) {
+            require_once __DIR__.'/../Macros/locales.php';
+        }
     }
 }
