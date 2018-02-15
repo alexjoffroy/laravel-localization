@@ -30,6 +30,7 @@ class LocalizationServiceProvider extends ServiceProvider
     public function registerHelpers()
     {
         require_once __DIR__ . '/../Helpers/l10n.php';
+        require_once __DIR__ . '/../Helpers/locale.php';
     }
 
     public function registerMacros()
