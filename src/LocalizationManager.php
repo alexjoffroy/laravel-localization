@@ -34,7 +34,7 @@ class LocalizationManager
      */
     public function getSupportedLocales()
     {
-        return collect($this->app['config']->get('localization.supported_locales'));
+        return collect($this->app->config->get('localization.supported_locales'));
     }
 
     /**
@@ -52,12 +52,18 @@ class LocalizationManager
 
     public function getDefaultLocale(): string
     {
-        return $this->app['config']->get('localization.default_locale');
+        return $this->app->config->get('localization.default_locale');
     }
 
     public function isDefaultLocale(string $locale = ''): bool
     {
         return $locale === $this->getDefaultLocale();
+    }
+
+    public function shouldHideLocaleInUrl($locale)
+    {
+        return $this->app->config->get('localization.hide_default_locale_in_url')
+            && $this->isDefaultLocale($locale);
     }
 
     public function route(string $name, array $parameters = [], bool $absolute = true, string $locale = ''): string

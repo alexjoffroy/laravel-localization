@@ -31,4 +31,24 @@ class RouteLocalesTest extends TestCase
         $this->assertEquals('/en/posts/123?foo=bar', route('en.posts.show', ['id' => 123, 'foo' => 'bar'], false));
         $this->assertEquals('/fr/articles/123?foo=bar', route('fr.posts.show', ['id' => 123, 'foo' => 'bar'], false));
     }
+
+    /** @test */
+    public function it_can_hide_the_default_locale_from_the_url()
+    {
+        config(['localization.hide_default_locale_in_url' => true]);
+        $router = $this->app['router'];
+        $router->locales(function () use ($router) {
+            $router->get(trans('routes.posts') . "/{id}", [
+                'as' => 'posts.show',
+                'uses' => function ($id) {
+                    return 'post ' . $id;
+                }
+            ]);
+        });
+
+        $this->assertTrue($router->has('en.posts.show'));
+        $this->assertTrue($router->has('fr.posts.show'));
+        $this->assertEquals('/posts/123?foo=bar', route('en.posts.show', ['id' => 123, 'foo' => 'bar'], false));
+        $this->assertEquals('/fr/articles/123?foo=bar', route('fr.posts.show', ['id' => 123, 'foo' => 'bar'], false));
+    }
 }

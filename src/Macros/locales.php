@@ -8,8 +8,9 @@ Route::macro('locales', function (Closure $closure) {
     $currentLocale = L10n::getLocale();
     foreach ($locales as $locale) {
         L10n::setLocale($locale);
+        $prefix = L10n::shouldHideLocaleInUrl($locale) ? '' : $locale;
         Route::as("$locale.")
-            ->prefix($locale)
+            ->prefix($prefix)
             ->group($closure);
     }
     L10n::setLocale($currentLocale);
