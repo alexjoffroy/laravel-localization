@@ -68,4 +68,18 @@ class LocalizationManager
 
         return $this->app['url']->route("$locale.$name", $parameters, $absolute);
     }
+
+    public function currentRoute(string $locale, bool $absolute = true): string
+    {
+        $request = $this->app->request;
+        $routeName = $request->route()->getName();
+        $parameters = $request->route()->parameters();
+        $url = $this->route($routeName, $parameters, $absolute, $locale);
+
+        if ($query = $request->query()) {
+            $url .= '?' . http_build_query($query);
+        }
+
+        return $url;
+    }
 }

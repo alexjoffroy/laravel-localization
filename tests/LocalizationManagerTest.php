@@ -145,4 +145,18 @@ class LocalizationManagerTest extends TestCase
         $this->assertEquals(url('/fr/articles/123'), $this->localization->route('en.posts.show', ['id' => 123], true, 'fr'));
         $this->assertEquals('/fr/articles/123', $this->localization->route('en.posts.show', ['id' => 123], false, 'fr'));
     }
+
+    /** @test */
+    public function it_can_switch_locale_from_current_route()
+    {
+        $this->get('/en/posts/123?foo=bar');
+        $this->localization->setLocale('en');
+        $this->assertEquals(url('/fr/articles/123?foo=bar'), $this->localization->currentRoute('fr'));
+        $this->assertEquals('/fr/articles/123?foo=bar', $this->localization->currentRoute('fr', false));
+
+        $this->get('/fr/articles/123?foo=bar');
+        $this->localization->setLocale('fr');
+        $this->assertEquals(url('/en/posts/123?foo=bar'), $this->localization->currentRoute('en'));
+        $this->assertEquals('/en/posts/123?foo=bar', $this->localization->currentRoute('en', false));
+    }
 }
