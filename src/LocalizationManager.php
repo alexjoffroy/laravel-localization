@@ -59,4 +59,13 @@ class LocalizationManager
     {
         return $locale === $this->getDefaultLocale();
     }
+
+    public function route(string $name, array $parameters = [], bool $absolute = true, string $locale = ''): string
+    {
+        $locale = $this->isSupportedLocale($locale) ? $locale : $this->getLocale();
+        $localesPattern = $this->getSupportedLocalesKeys()->implode('|');
+        $name = preg_replace("/^($localesPattern)\./", '', $name);
+
+        return $this->app['url']->route("$locale.$name", $parameters, $absolute);
+    }
 }
