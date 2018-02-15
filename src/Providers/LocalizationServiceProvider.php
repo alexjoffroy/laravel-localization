@@ -23,7 +23,13 @@ class LocalizationServiceProvider extends ServiceProvider
             return new LocalizationManager($this->app);
         });
 
+        $this->registerHelpers();
         $this->registerMacros();
+    }
+
+    public function registerHelpers()
+    {
+        require_once __DIR__ . '/../Helpers/l10n.php';
     }
 
     public function registerMacros()
