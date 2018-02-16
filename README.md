@@ -43,7 +43,7 @@ The default locale can be changed in the config file. By default, this value is 
 
 ### Supported locales
 
-You can list all locales you want to support here. The key is the locale code. The `native` field is label which will be renderer in the switch view.
+You can list all locales you want to support here. The key is the locale code. The `native` field is the label which will be rendered in the switch view.
 
 ```php
 'supported_locales' => [
