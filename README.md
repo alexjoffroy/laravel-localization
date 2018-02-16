@@ -8,12 +8,12 @@
 
 This Laravel package gives you the ability to simply handle localization in your application. It provides a set of helpers so you can basically do stuff like:
 
-```
+```bash
 GET /en/about # Displays the about page in english
 GET /fr/a-propos # Displays the about page in french
 ```
 
-This package try to fit at its best the Laravel concepts and you can still continue to use core features such as testing, route caching, lang files, ...
+You can still continue to use core features such as testing, route caching, lang files, ... 
 
 ## Installation
 
@@ -21,101 +21,6 @@ You can install the package via composer:
 
 ```bash
 composer require alexjoffroy/laravel-localization
-```
-
-## Usage
-
-### Register the middleware
-The first step is to register the `SetLocale` middleware to your app. This middleware will guess and set the current locale from the URL. 
-The easiest way to do that is to regeister it globally:
-```php
-// app/Http/Kernel.php
-
-protected $middleware = [
-    // ...
-    \AlexJoffroy\LaravelLocalization\Http\Middlewares\SetLocale::class,
-];
-```
-
-### Add your routes
-You are now able to register your locales routes, with a convenient helper:
-```php
-// routes/web.php
-
-Route::locales(function() {
-    Route::get(
-        trans('routes.about'), 
-        'App\Http\Controllers\AboutController@index'
-    )->name('about');
-});
-```
-
-> Warning: all routes defined inside the `locales` group should be named.
-
-According you are supporting `en` and `fr` locales and you defined translations for `routes.about`, the above code will register these routes:
-
-| Verb         | URL         | Name     | Action                                     | 
-| ------------ |------------ | -------- | ------------------------------------------ |
-| GET|HEAD     | en/about    | en.about | App\Http\Controllers\AboutController@index |
-| GET|HEAD     | fr/a-propos | fr.about | App\Http\Controllers\AboutController@index |
-
-### API
-
-#### LocalizationManager
-
-The `\AlexJoffroy\LaravelLocalization\LocalizationManager` class provides a set of methods which could be helpful to use in your app. The object is registered as singleton and can be accessed form the app container, the `L10n` facade or `l10n()` helper.
-
-```php
-app('localization')->getLocale(); // Get the current locale
-app('localization')->setLocale('en'); // Set the current locale to `fr`
-app('localization')->isCurrentLocale('en'); // Return true
-app('localization')->isCurrentLocale('not-current'); // Return false
-app('localization')->getSupportedLocales(); // Return [ 'en' => ['native' => 'English'], 'fr' => ['native' => 'Français']]
-app('localization')->getSupportedLocaleKeys(); // Return ['en', 'fr']
-app('localization')->isSupportedLocale('en'); // Return true
-app('localization')->isSupportedLocale('not-supported'); // Return false
-app('localization')->getDefaultLocale(); // Return the default locale set in `config/localization.php`
-app('localization')->isDefaultLocale('en'); // Return true
-app('localization')->isDefaultLocale('not-default'); // Return false
-app('localization')->shouldHideLocaleInUrl('en'); // Return true if `hide_locale_in_url` is set to true in `config/localization.php`
-
-app('localization')->route('about', [], true, 'en'); // Return `https://yourapp.dev/en/about`
-app('localization')->route('about', [], false, 'en'); // Return `/en/about`
-app('localization')->route('about', [], true, 'fr'); // Return `https://yourapp.dev/fr/a-propos`
-// Shortcut will fallback to current locale
-app('localization')->route('about'); // Return `https://yourapp.dev/en/about` 
-
-// Current app url is `https://yourapp.dev/en/about`
-app('localization')->currentRoute('fr'); // Return `https://yourapp.dev/fr/a-propos`
-app('localization')->currentRoute('fr', false); // Return `/fr/a-propos`
-```
-
-#### Facade
-
-The LocalizationManager methods are also available from the `L10n` facade.
-
-```php
-L10n::getLocale();
-L10n::setLocale();
-L10n::route();
-L10n::currentRoute();
-// etc
-```
-
-#### Helpers
-
-```php
-// Get the LocalizationManager instance
-$l10n = l10n(); 
-
-// Get the current locale
-$current = locale(); 
-
-// Set the current locale
-locale('en');
-
-// Get supported locale
-$supported = locales();
 ```
 
 ## Configuration 
@@ -153,6 +58,118 @@ By default, the package will prefix all URLs with the locale. Set this value to 
 
 ```php
 'hide_default_locale_in_url' => false,
+```
+
+## Usage
+
+### Register the middleware
+The first step is to register the `SetLocale` middleware to your app. This middleware will guess and set the current locale from the URL. 
+The easiest way to do that is to register it globally:
+```php
+// app/Http/Kernel.php
+
+protected $middleware = [
+    // ...
+    \AlexJoffroy\LaravelLocalization\Http\Middlewares\SetLocale::class,
+];
+```
+
+### Add your routes
+You are now able to register your locales routes, with a convenient helper:
+```php
+// routes/web.php
+
+Route::locales(function() {
+    Route::get(
+        trans('routes.about'), 
+        'App\Http\Controllers\AboutController@index'
+    )->name('about');
+});
+```
+
+> Warning: all routes defined inside the `locales` group should be named.
+
+According you are supporting `en` and `fr` locales and you defined translations for `routes.about`, the above code will register these routes:
+
+| Verb         | URL         | Name     | Action                                     | 
+| ------------ |------------ | -------- | ------------------------------------------ |
+| GET HEAD     | en/about    | en.about | App\Http\Controllers\AboutController@index |
+| GET HEAD     | fr/a-propos | fr.about | App\Http\Controllers\AboutController@index |
+
+### API
+
+#### LocalizationManager
+
+The `\AlexJoffroy\LaravelLocalization\LocalizationManager` class provides a set of methods which could be helpful to use in your app. The object is registered as singleton and can be accessed form the app container, the `L10n` facade or `l10n()` helper.
+
+```php
+$l10n = app('localization');
+
+$l10n->getLocale(); // Get the current locale
+
+$l10n->setLocale('en'); // Set the current locale to `fr`
+
+$l10n->isCurrentLocale('en'); // Return true
+
+$l10n->isCurrentLocale('not-current'); // Return false
+
+$l10n->getSupportedLocales(); // Return [ 'en' => ['native' => 'English'], 'fr' => ['native' => 'Français']]
+
+$l10n->getSupportedLocaleKeys(); // Return ['en', 'fr']
+
+$l10n->isSupportedLocale('en'); // Return true
+
+$l10n->isSupportedLocale('not-supported'); // Return false
+
+$l10n->getDefaultLocale(); // Return the default locale set in `config/localization.php`
+
+$l10n->isDefaultLocale('en'); // Return true
+
+$l10n->isDefaultLocale('not-default'); // Return false
+
+$l10n->shouldHideLocaleInUrl('en'); // Return true if `hide_locale_in_url` is set to true in `config/localization.php`
+
+$l10n->route('about', [], true, 'en'); // Return `https://yourapp.dev/en/about`
+
+$l10n->route('about', [], false, 'en'); // Return `/en/about`
+
+$l10n->route('about', [], true, 'fr'); // Return `https://yourapp.dev/fr/a-propos`
+
+// Shortcut will fallback to current locale
+$l10n->route('about'); // Return `https://yourapp.dev/en/about` 
+
+// Current app url is `https://yourapp.dev/en/about`
+$l10n->currentRoute('fr'); // Return `https://yourapp.dev/fr/a-propos`
+
+$l10n->currentRoute('fr', false); // Return `/fr/a-propos`
+```
+
+#### Facade
+
+The LocalizationManager methods are also available from the `L10n` facade.
+
+```php
+L10n::getLocale();
+L10n::setLocale();
+L10n::route();
+L10n::currentRoute();
+// etc
+```
+
+#### Helpers
+
+```php
+// Get the LocalizationManager instance
+$l10n = l10n(); 
+
+// Get the current locale
+$current = locale(); 
+
+// Set the current locale
+locale('en');
+
+// Get supported locale
+$supported = locales();
 ```
 
 ## Testing
