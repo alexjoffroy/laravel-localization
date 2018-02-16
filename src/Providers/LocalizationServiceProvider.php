@@ -36,8 +36,6 @@ class LocalizationServiceProvider extends ServiceProvider
 
     public function registerMacros()
     {
-        if (!$this->app->router->hasMacro('locales')) {
-            require_once __DIR__.'/../Macros/locales.php';
-        }
+        require_once __DIR__.'/../Macros/locales.php';
     }
 }
