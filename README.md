@@ -1,3 +1,5 @@
+> **Currently in active development, first release coming soon **
+
 # A Laravel package to handle localization with ease
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/alexjoffroy/laravel-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-localization)
