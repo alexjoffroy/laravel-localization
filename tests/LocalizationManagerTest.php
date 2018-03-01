@@ -37,10 +37,12 @@ class LocalizationManagerTest extends TestCase
     public function it_can_set_the_current_locale()
     {
         $this->assertEquals($this->localization->getLocale(), 'en');
+        $this->assertNotEquals(setlocale(LC_TIME, 0), 'fr_FR.UTF-8');
         
         $this->localization->setLocale('fr');
 
         $this->assertEquals($this->localization->getLocale(), 'fr');
+        $this->assertEquals(setlocale(LC_TIME, 0), 'fr_FR.UTF-8');
     }
 
     /** @test */

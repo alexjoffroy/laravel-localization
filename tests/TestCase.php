@@ -11,8 +11,18 @@ class TestCase extends OrchestraTestCase
     protected $localization;
 
     protected $locales = [
-        'en' => ['native' => 'English'],
-        'fr' => ['native' => 'Français'],
+        'en' => [
+            'native' => 'English',
+            'regional_code' => 'en_GB',
+            'charset' => 'UTF-8',
+            'constants' => ['LC_TIME'],
+        ],
+        'fr' => [
+            'native' => 'Français',
+            'regional_code' => 'fr_FR',
+            'charset' => 'UTF-8',
+            'constants' => ['LC_TIME'],
+        ],
     ];
 
     protected function setUp()

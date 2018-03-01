@@ -3,6 +3,7 @@
 namespace AlexJoffroy\LaravelLocalization;
 
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Collection;
 
 class LocalizationManager
 {
@@ -21,7 +22,18 @@ class LocalizationManager
 
     public function setLocale(string $locale = '')
     {
-        return $this->app->setLocale($locale);
+        $this->app->setLocale($locale);
+
+        $supportedLocale = $this->getSupportedLocale($locale);
+        $constants = collect($supportedLocale->get('constants', []));
+        $regionalCode = $supportedLocale->get('regional_code');
+        $charset = $supportedLocale->get('charset', false);
+
+        $localeCode = $charset ? "$regionalCode.$charset" : $regionalCode;
+
+        $constants->each(function ($constant) use ($localeCode) {
+            setlocale(constant($constant), $localeCode);
+        });
     }
 
     public function isCurrentLocale(string $locale = ''): bool
@@ -29,18 +41,23 @@ class LocalizationManager
         return $locale === $this->getLocale();
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function getSupportedLocales()
+    public function getSupportedLocale(string $locale = ''): Collection
+    {
+        $locales = $this->getSupportedLocales();
+
+        if ($locales->has($locale)) {
+            return collect($locales->get($locale));
+        }
+
+        return collect([]);
+    }
+    
+    public function getSupportedLocales(): Collection
     {
         return collect($this->app->config->get('localization.supported_locales'));
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function getSupportedLocalesKeys()
+    public function getSupportedLocalesKeys(): Collection
     {
         return $this->getSupportedLocales()->keys();
     }

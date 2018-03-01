@@ -45,12 +45,27 @@ The default locale can be changed in the config file. By default, this value is 
 
 ### Supported locales
 
-You can list all locales you want to support here. The key is the locale code. The `native` field is the label which will be rendered in the switch view.
+You can list all locales you want to support here. 
+
+Each key should be a locale code (en, fr, ...).
+
+The `native` field is the label which will be rendered in the switch view.
+`regional_code`, `charset`, and `constants` fields are required to work with [PHP's setlocale](http://php.net/manual/en/function.setlocale.php), which is called in `LocalizationManager::setLocale`. This is useful for stuff like date formatting with Carbon. 
 
 ```php
 'supported_locales' => [
-    'en' => ['native' => 'English'],
-    'fr' => ['native' => 'Français'],
+    'en' => [
+        'native' => 'English',
+        'regional_code' => 'en_GB',
+        'charset' => 'UTF-8',
+        'constants' => ['LC_TIME'],
+    ],
+    'fr' => [
+        'native' => 'Français',
+        'regional_code' => 'fr_FR',
+        'charset' => 'UTF-8',
+        'constants' => ['LC_TIME'],
+    ],
 ],
 ```
 
@@ -115,7 +130,9 @@ $l10n->isCurrentLocale('en'); // Return true
 
 $l10n->isCurrentLocale('not-current'); // Return false
 
-$l10n->getSupportedLocales(); // Return [ 'en' => ['native' => 'English'], 'fr' => ['native' => 'Français']]
+$l10n->getSupportedLocales(); // Return config value (supported_locales)
+
+$l10n->getSupportedLocale('en'); // Return config value for specific locale
 
 $l10n->getSupportedLocaleKeys(); // Return ['en', 'fr']
 
