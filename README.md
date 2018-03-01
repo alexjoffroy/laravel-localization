@@ -17,6 +17,24 @@ GET /fr/a-propos # Displays the about page in french
 
 You can still continue to use core features such as testing, route caching, lang files, ... 
 
+## Table of content
+- [Installation](#installation)
+- [Configuration](#configuration)
+    - [Default locale](#default-locale)
+    - [Supported locales](#supported-locales)
+    - [Hide default locale in url](#hide-default-locale-in-url)
+- [Usage](#usage)
+    - [Register the middleware](#register-the-middleware)
+    - [Add your routes](#add-your-routes)
+    - [API](#api)
+- [Testing](#testing)
+- [Changelog](#changelog)
+- [Contributing](#contributing)
+- [Security](#security)
+- [Credits](#credits)
+- [License](#license)
+
+
 ## Installation
 
 You can install the package via composer:
