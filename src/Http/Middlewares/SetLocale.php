@@ -20,6 +20,7 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         $locale = $request->segment(1, '');
+        
         if (!$this->localization->isSupportedLocale($locale)) {
             $locale = $this->localization->getDefaultLocale();
         }
