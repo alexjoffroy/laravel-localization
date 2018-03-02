@@ -1,4 +1,4 @@
-> **Currently in active development, first release coming soon **
+**_Currently in active development, first release coming soon_**
 
 # A Laravel package to handle localization with ease
 
@@ -47,10 +47,10 @@ composer require alexjoffroy/laravel-route-localization
 
 This package will automatically register service provider and facade.
 
-To publish the config file `config/localization.php` run
+To publish the config file `config/route-localization.php` run
 
 ```bash
-php artisan vendor:publish --provider="AlexJoffroy\RouteLocalization\Providers\RouteLocalizationServiceProvider"
+php artisan vendor:publish --provider="AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider"
 ```
 
 ### Default locale
@@ -68,7 +68,7 @@ You can list all locales you want to support here.
 Each key should be a locale code (en, fr, ...).
 
 The `native` field is the label which will be rendered in the switch view.
-`regional_code`, `charset`, and `constants` fields are required to work with [PHP's setlocale](http://php.net/manual/en/function.setlocale.php), which is called in `LocalizationManager::setLocale`. This is useful for stuff like date formatting with Carbon. 
+`regional_code`, `charset`, and `constants` fields are required to work with [PHP's setlocale](http://php.net/manual/en/function.setlocale.php), which is called in `RouteLocalization::setLocale`. This is useful for stuff like date formatting with Carbon. 
 
 ```php
 'supported_locales' => [
@@ -133,12 +133,12 @@ According you are supporting `en` and `fr` locales and you defined translations 
 
 ### API
 
-#### LocalizationManager
+#### RouteLocalization
 
-The `\AlexJoffroy\RouteLocalization\LocalizationManager` class provides a set of methods which could be helpful to use in your app. The object is registered as singleton and can be accessed form the app container, the `L10n` facade or `l10n()` helper.
+The `\AlexJoffroy\RouteLocalization\RouteLocalization` class provides a set of methods which could be helpful to use in your app. The object is registered as singleton and can be accessed form the app container, the `L10n` facade or `l10n()` helper.
 
 ```php
-$l10n = app('localization');
+$l10n = app('route-localization');
 
 $l10n->getLocale(); // Get the current locale
 
@@ -158,13 +158,13 @@ $l10n->isSupportedLocale('en'); // Return true
 
 $l10n->isSupportedLocale('not-supported'); // Return false
 
-$l10n->getDefaultLocale(); // Return the default locale set in `config/localization.php`
+$l10n->getDefaultLocale(); // Return the default locale set in `config/route-localization.php`
 
 $l10n->isDefaultLocale('en'); // Return true
 
 $l10n->isDefaultLocale('not-default'); // Return false
 
-$l10n->shouldHideLocaleInUrl('en'); // Return true if `hide_locale_in_url` is set to true in `config/localization.php`
+$l10n->shouldHideLocaleInUrl('en'); // Return true if `hide_locale_in_url` is set to true in `config/route-localization.php`
 
 $l10n->route('about', [], true, 'en'); // Return `https://yourapp.dev/en/about`
 
@@ -183,7 +183,7 @@ $l10n->currentRoute('fr', false); // Return `/fr/a-propos`
 
 #### Facade
 
-The LocalizationManager methods are also available from the `L10n` facade.
+The RouteLocalization methods are also available from the `L10n` facade.
 
 ```php
 L10n::getLocale();
@@ -196,7 +196,7 @@ L10n::currentRoute();
 #### Helpers
 
 ```php
-// Get the LocalizationManager instance
+// Get the RouteLocalization instance
 $l10n = l10n(); 
 
 // Get the current locale
