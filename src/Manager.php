@@ -23,17 +23,6 @@ class Manager
     public function setLocale(string $locale = '')
     {
         $this->app->setLocale($locale);
-
-        $supportedLocale = $this->getSupportedLocale($locale);
-        $constants = collect($supportedLocale->get('constants', []));
-        $regionalCode = $supportedLocale->get('regional_code');
-        $charset = $supportedLocale->get('charset', false);
-
-        $localeCode = $charset ? "$regionalCode.$charset" : $regionalCode;
-
-        $constants->each(function ($constant) use ($localeCode) {
-            setlocale(constant($constant), $localeCode);
-        });
     }
 
     public function isCurrentLocale(string $locale = ''): bool

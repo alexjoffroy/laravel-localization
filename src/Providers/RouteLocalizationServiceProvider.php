@@ -5,6 +5,8 @@ namespace AlexJoffroy\RouteLocalization\Providers;
 use Closure;
 use Illuminate\Support\ServiceProvider;
 use AlexJoffroy\RouteLocalization\Manager;
+use Illuminate\Foundation\Events\LocaleUpdated;
+use AlexJoffroy\RouteLocalization\Listeners\AppLocaleUpdated;
 
 class RouteLocalizationServiceProvider extends ServiceProvider
 {
@@ -13,6 +15,8 @@ class RouteLocalizationServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../config/localization.php' => config_path('localization.php'),
         ], 'config');
+
+        $this->app->events->listen(LocaleUpdated::class, AppLocaleUpdated::class);
     }
 
     public function register()
