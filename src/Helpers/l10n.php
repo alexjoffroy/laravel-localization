@@ -6,6 +6,6 @@ if (!function_exists('l10n')) {
      */
     function l10n()
     {
-        return app('localization');
+        return app('route-localization');
     }
 }

@@ -11,6 +11,6 @@ class L10n extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'localization';
+        return 'route-localization';
     }
 }

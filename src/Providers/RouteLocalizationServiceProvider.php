@@ -23,7 +23,7 @@ class RouteLocalizationServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/route-localization.php', 'route-localization');
 
-        $this->app->singleton('localization', function () {
+        $this->app->singleton('route-localization', function () {
             return new Manager($this->app);
         });
 

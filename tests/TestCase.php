@@ -29,7 +29,7 @@ class TestCase extends OrchestraTestCase
     {
         parent::setUp();
 
-        $this->localization = $this->app['localization'];
+        $this->localization = $this->app['route-localization'];
         $this->app->setLocale('en');
 
         $this->app['config']->set([

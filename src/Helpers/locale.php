@@ -6,7 +6,7 @@ if (!function_exists('locale')) {
      */
     function locale($locale = null)
     {
-        $l10n = app('localization');
+        $l10n = app('route-localization');
         if ($locale) {
             return $l10n->setLocale($locale);
         }
