@@ -5,7 +5,7 @@ namespace AlexJoffroy\RouteLocalization;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 
-class Manager
+class RouteLocalization
 {
     /** @var \Illuminate\Contracts\Container\Container */
     protected $app;

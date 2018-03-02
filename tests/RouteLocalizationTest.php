@@ -2,9 +2,9 @@
 
 namespace AlexJoffroy\RouteLocalization\Tests;
 
-use AlexJoffroy\RouteLocalization\Manager;
+use AlexJoffroy\RouteLocalization\RouteLocalization;
 
-class ManagerTest extends TestCase
+class RouteLocalizationTest extends TestCase
 {
     protected function setUp()
     {
@@ -24,7 +24,7 @@ class ManagerTest extends TestCase
     /** @test */
     public function it_can_resolve_the_localization_manager()
     {
-        $this->assertTrue($this->localization instanceof Manager);
+        $this->assertTrue($this->localization instanceof RouteLocalization);
     }
 
     /** @test */

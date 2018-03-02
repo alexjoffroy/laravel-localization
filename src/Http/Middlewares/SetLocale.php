@@ -4,27 +4,27 @@ namespace AlexJoffroy\RouteLocalization\Http\Middlewares;
 
 use Closure;
 use Illuminate\Http\Request;
-use AlexJoffroy\RouteLocalization\Manager;
+use AlexJoffroy\RouteLocalization\RouteLocalization;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
 {
-    /** @var \AlexJoffroy\RouteLocalization\Manager */
-    protected $manager;
+    /** @var \AlexJoffroy\RouteLocalization\RouteLocalization */
+    protected $localization;
 
-    public function __construct(Manager $manager)
+    public function __construct(RouteLocalization $localization)
     {
-        $this->manager = $manager;
+        $this->localization = $localization;
     }
 
     public function handle(Request $request, Closure $next): Response
     {
         $locale = $request->segment(1, '');
-        if (!$this->manager->isSupportedLocale($locale)) {
-            $locale = $this->manager->getDefaultLocale();
+        if (!$this->localization->isSupportedLocale($locale)) {
+            $locale = $this->localization->getDefaultLocale();
         }
 
-        $this->manager->setLocale($locale);
+        $this->localization->setLocale($locale);
 
         return $next($request);
     }

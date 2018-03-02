@@ -3,14 +3,14 @@
 namespace AlexJoffroy\RouteLocalization\Listeners;
 
 use Illuminate\Foundation\Events\LocaleUpdated;
-use AlexJoffroy\RouteLocalization\Manager;
+use AlexJoffroy\RouteLocalization\RouteLocalization;
 
 class AppLocaleUpdated
 {
-    /** @var \AlexJoffroy\RouteLocalization\Manager */
+    /** @var \AlexJoffroy\RouteLocalization\RouteLocalization */
     protected $localization;
     
-    public function __construct(Manager $localization)
+    public function __construct(RouteLocalization $localization)
     {
         $this->localization = $localization;
     }

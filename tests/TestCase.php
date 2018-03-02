@@ -7,7 +7,7 @@ use AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider;
 
 class TestCase extends OrchestraTestCase
 {
-    /** @var \AlexJoffroy\RouteLocalization\Manager */
+    /** @var \AlexJoffroy\RouteLocalization\RouteLocalization */
     protected $localization;
 
     protected $locales = [

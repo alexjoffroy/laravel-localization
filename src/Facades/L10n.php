@@ -5,7 +5,7 @@ namespace AlexJoffroy\RouteLocalization\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \AlexJoffroy\RouteLocalization\Manager
+ * @see \AlexJoffroy\RouteLocalization\RouteLocalization
  */
 class L10n extends Facade
 {

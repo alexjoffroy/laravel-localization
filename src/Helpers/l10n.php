@@ -2,7 +2,7 @@
 
 if (!function_exists('l10n')) {
     /**
-     * @return \AlexJoffroy\RouteLocalization\Manager
+     * @return \AlexJoffroy\RouteLocalization\RouteLocalization
      */
     function l10n()
     {

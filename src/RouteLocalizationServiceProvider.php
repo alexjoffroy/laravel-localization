@@ -4,7 +4,7 @@ namespace AlexJoffroy\RouteLocalization;
 
 use Closure;
 use Illuminate\Support\ServiceProvider;
-use AlexJoffroy\RouteLocalization\Manager;
+use AlexJoffroy\RouteLocalization\RouteLocalization;
 use Illuminate\Foundation\Events\LocaleUpdated;
 use AlexJoffroy\RouteLocalization\Listeners\AppLocaleUpdated;
 
@@ -24,7 +24,7 @@ class RouteLocalizationServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/route-localization.php', 'route-localization');
 
         $this->app->singleton('route-localization', function () {
-            return new Manager($this->app);
+            return new RouteLocalization($this->app);
         });
 
         $this->registerHelpers();
