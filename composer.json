@@ -48,7 +48,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AlexJoffroy\\RouteLocalization\\Providers\\RouteLocalizationServiceProvider"
+                "AlexJoffroy\\RouteLocalization\\RouteLocalizationServiceProvider"
             ],
             "aliases": {
                 "RouteLocalization": "AlexJoffroy\\RouteLocalization\\Facades\\Localization"

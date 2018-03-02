@@ -3,7 +3,7 @@
 namespace AlexJoffroy\RouteLocalization\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use AlexJoffroy\RouteLocalization\Providers\RouteLocalizationServiceProvider;
+use AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider;
 
 class TestCase extends OrchestraTestCase
 {

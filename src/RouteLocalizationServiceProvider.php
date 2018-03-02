@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization\Providers;
+namespace AlexJoffroy\RouteLocalization;
 
 use Closure;
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +13,7 @@ class RouteLocalizationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/route-localization.php' => config_path('route-localization.php'),
+            __DIR__ . '/../config/route-localization.php' => config_path('route-localization.php'),
         ], 'config');
 
         $this->app->events->listen(LocaleUpdated::class, AppLocaleUpdated::class);
@@ -21,7 +21,7 @@ class RouteLocalizationServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/route-localization.php', 'route-localization');
+        $this->mergeConfigFrom(__DIR__ . '/../config/route-localization.php', 'route-localization');
 
         $this->app->singleton('route-localization', function () {
             return new Manager($this->app);
@@ -33,13 +33,13 @@ class RouteLocalizationServiceProvider extends ServiceProvider
 
     public function registerHelpers()
     {
-        require_once __DIR__ . '/../Helpers/l10n.php';
-        require_once __DIR__ . '/../Helpers/locale.php';
-        require_once __DIR__ . '/../Helpers/locales.php';
+        require_once __DIR__ . '/Helpers/l10n.php';
+        require_once __DIR__ . '/Helpers/locale.php';
+        require_once __DIR__ . '/Helpers/locales.php';
     }
 
     public function registerMacros()
     {
-        require_once __DIR__.'/../Macros/locales.php';
+        require_once __DIR__.'/Macros/locales.php';
     }
 }
