@@ -13,7 +13,7 @@ class RouteLocalizationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/localization.php' => config_path('localization.php'),
+            __DIR__ . '/../../config/route-localization.php' => config_path('route-localization.php'),
         ], 'config');
 
         $this->app->events->listen(LocaleUpdated::class, AppLocaleUpdated::class);
@@ -21,7 +21,7 @@ class RouteLocalizationServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/localization.php', 'localization');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/route-localization.php', 'route-localization');
 
         $this->app->singleton('localization', function () {
             return new Manager($this->app);

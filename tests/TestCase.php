@@ -33,8 +33,8 @@ class TestCase extends OrchestraTestCase
         $this->app->setLocale('en');
 
         $this->app['config']->set([
-            'localization.supported_locales' => $this->locales,
-            'localization.default_locale' => 'en'
+            'route-localization.supported_locales' => $this->locales,
+            'route-localization.default_locale' => 'en'
         ]);
         $this->app['translator']->addLines(['routes.posts' => 'posts'], 'en');
         $this->app['translator']->addLines(['routes.posts' => 'articles'], 'fr');

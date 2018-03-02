@@ -15,6 +15,11 @@ class Manager
         $this->app = $app;
     }
 
+    protected function config(string $key)
+    {
+        return config("route-localization.$key");
+    }
+
     public function getLocale(): string
     {
         return $this->app->getLocale();
@@ -43,7 +48,7 @@ class Manager
     
     public function getSupportedLocales(): Collection
     {
-        return collect($this->app->config->get('localization.supported_locales'));
+        return collect($this->config('supported_locales'));
     }
 
     public function getSupportedLocalesKeys(): Collection
@@ -58,7 +63,7 @@ class Manager
 
     public function getDefaultLocale(): string
     {
-        return $this->app->config->get('localization.default_locale');
+        return $this->config('default_locale');
     }
 
     public function isDefaultLocale(string $locale = ''): bool
@@ -68,7 +73,7 @@ class Manager
 
     public function shouldHideLocaleInUrl($locale)
     {
-        return $this->app->config->get('localization.hide_default_locale_in_url')
+        return $this->config('hide_default_locale_in_url')
             && $this->isDefaultLocale($locale);
     }
 
