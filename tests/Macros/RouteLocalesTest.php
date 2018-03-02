@@ -1,9 +1,8 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Tests\Macros;
+namespace AlexJoffroy\RouteLocalization\Tests\Macros;
 
-use AlexJoffroy\LaravelLocalization\Tests\TestCase;
-use AlexJoffroy\LaravelLocalization\LocalizationManager;
+use AlexJoffroy\RouteLocalization\Tests\TestCase;
 
 class RouteLocalesTest extends TestCase
 {

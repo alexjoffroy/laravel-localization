@@ -1,13 +1,13 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Tests;
+namespace AlexJoffroy\RouteLocalization\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use AlexJoffroy\LaravelLocalization\Providers\LocalizationServiceProvider;
+use AlexJoffroy\RouteLocalization\Providers\RouteLocalizationServiceProvider;
 
 class TestCase extends OrchestraTestCase
 {
-    /** @var \AlexJoffroy\LaravelLocalization\LocalizationManager */
+    /** @var \AlexJoffroy\RouteLocalization\Manager */
     protected $localization;
 
     protected $locales = [
@@ -42,6 +42,6 @@ class TestCase extends OrchestraTestCase
 
     protected function getPackageProviders($app): array
     {
-        return [LocalizationServiceProvider::class];
+        return [RouteLocalizationServiceProvider::class];
     }
 }

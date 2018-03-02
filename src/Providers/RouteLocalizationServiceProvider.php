@@ -1,12 +1,12 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Providers;
+namespace AlexJoffroy\RouteLocalization\Providers;
 
 use Closure;
 use Illuminate\Support\ServiceProvider;
-use AlexJoffroy\LaravelLocalization\LocalizationManager;
+use AlexJoffroy\RouteLocalization\Manager;
 
-class LocalizationServiceProvider extends ServiceProvider
+class RouteLocalizationServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -20,7 +20,7 @@ class LocalizationServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../config/localization.php', 'localization');
 
         $this->app->singleton('localization', function () {
-            return new LocalizationManager($this->app);
+            return new Manager($this->app);
         });
 
         $this->registerHelpers();

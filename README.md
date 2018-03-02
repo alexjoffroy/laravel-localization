@@ -2,11 +2,11 @@
 
 # A Laravel package to handle localization with ease
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/alexjoffroy/laravel-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-localization)
-[![Build Status](https://img.shields.io/travis/alexjoffroy/laravel-localization/master.svg?style=flat-square)](https://travis-ci.org/alexjoffroy/laravel-localization)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-route-localization)
+[![Build Status](https://img.shields.io/travis/alexjoffroy/laravel-route-localization/master.svg?style=flat-square)](https://travis-ci.org/alexjoffroy/laravel-route-localization)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/xxxxxxxxx.svg?style=flat-square)](https://insight.sensiolabs.com/projects/xxxxxxxxx)
-[![Quality Score](https://img.shields.io/scrutinizer/g/alexjoffroy/laravel-localization.svg?style=flat-square)](https://scrutinizer-ci.com/g/alexjoffroy/laravel-localization)
-[![Total Downloads](https://img.shields.io/packagist/dt/alexjoffroy/laravel-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-localization)
+[![Quality Score](https://img.shields.io/scrutinizer/g/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://scrutinizer-ci.com/g/alexjoffroy/laravel-route-localization)
+[![Total Downloads](https://img.shields.io/packagist/dt/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-route-localization)
 
 This Laravel package gives you the ability to simply handle localization in your application. It provides a set of helpers so you can basically do stuff like:
 
@@ -40,7 +40,7 @@ You can still continue to use core features such as testing, route caching, lang
 You can install the package via composer:
 
 ```bash
-composer require alexjoffroy/laravel-localization
+composer require alexjoffroy/laravel-route-localization
 ```
 
 ## Configuration 
@@ -50,7 +50,7 @@ This package will automatically register service provider and facade.
 To publish the config file `config/localization.php` run
 
 ```bash
-php artisan vendor:publish --provider="AlexJoffroy\LaravelLocalization\Providers\LocalizationServiceProvider"
+php artisan vendor:publish --provider="AlexJoffroy\RouteLocalization\Providers\RouteLocalizationServiceProvider"
 ```
 
 ### Default locale
@@ -105,7 +105,7 @@ The easiest way to do that is to register it globally:
 
 protected $middleware = [
     // ...
-    \AlexJoffroy\LaravelLocalization\Http\Middlewares\SetLocale::class,
+    \AlexJoffroy\RouteLocalization\Http\Middlewares\SetLocale::class,
 ];
 ```
 
@@ -135,7 +135,7 @@ According you are supporting `en` and `fr` locales and you defined translations 
 
 #### LocalizationManager
 
-The `\AlexJoffroy\LaravelLocalization\LocalizationManager` class provides a set of methods which could be helpful to use in your app. The object is registered as singleton and can be accessed form the app container, the `L10n` facade or `l10n()` helper.
+The `\AlexJoffroy\RouteLocalization\LocalizationManager` class provides a set of methods which could be helpful to use in your app. The object is registered as singleton and can be accessed form the app container, the `L10n` facade or `l10n()` helper.
 
 ```php
 $l10n = app('localization');

@@ -1,8 +1,8 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Tests\Helpers;
+namespace AlexJoffroy\RouteLocalization\Tests\Helpers;
 
-use AlexJoffroy\LaravelLocalization\Tests\TestCase;
+use AlexJoffroy\RouteLocalization\Tests\TestCase;
 
 class L10nTest extends TestCase
 {

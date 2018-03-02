@@ -1,14 +1,16 @@
 {
-    "name": "alexjoffroy/laravel-localization",
+    "name": "alexjoffroy/laravel-route-localization",
     "description": "A Laravel package to handle localization with ease",
     "keywords": [
         "alexjoffroy",
-        "laravel-localization",
+        "laravel-route-localization",
         "laravel",
+        "route",
         "localization",
+        "lang",
         "php"
     ],
-    "homepage": "https://github.com/alexjoffroy/laravel-localization",
+    "homepage": "https://github.com/alexjoffroy/laravel-route-localization",
     "license": "MIT",
     "authors": [
         {
@@ -27,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "AlexJoffroy\\LaravelLocalization\\": "src"
+            "AlexJoffroy\\RouteLocalization\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AlexJoffroy\\LaravelLocalization\\Tests\\": "tests"
+            "AlexJoffroy\\RouteLocalization\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -46,10 +48,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AlexJoffroy\\LaravelLocalization\\Providers\\LocalizationServiceProvider"
+                "AlexJoffroy\\RouteLocalization\\Providers\\RouteLocalizationServiceProvider"
             ],
             "aliases": {
-                "LaravelLocalization": "AlexJoffroy\\LaravelLocalization\\Facades\\Localization"
+                "RouteLocalization": "AlexJoffroy\\RouteLocalization\\Facades\\Localization"
             }
         }
     }

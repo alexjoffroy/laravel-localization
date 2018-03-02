@@ -1,11 +1,11 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Facades;
+namespace AlexJoffroy\RouteLocalization\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \AlexJoffroy\LaravelLocalization\LocalizationManager
+ * @see \AlexJoffroy\RouteLocalization\Manager
  */
 class L10n extends Facade
 {

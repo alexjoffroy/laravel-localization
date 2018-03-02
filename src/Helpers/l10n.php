@@ -2,7 +2,7 @@
 
 if (!function_exists('l10n')) {
     /**
-     * @return \App\Localization\LocalizationManager
+     * @return \AlexJoffroy\RouteLocalization\Manager
      */
     function l10n()
     {

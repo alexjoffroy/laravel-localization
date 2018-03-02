@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Tests\Facades;
+namespace AlexJoffroy\RouteLocalization\Tests\Facades;
 
-use AlexJoffroy\LaravelLocalization\Facades\L10n;
-use AlexJoffroy\LaravelLocalization\Tests\TestCase;
+use AlexJoffroy\RouteLocalization\Facades\L10n;
+use AlexJoffroy\RouteLocalization\Tests\TestCase;
 
 class L10nTest extends TestCase
 {

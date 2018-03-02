@@ -1,32 +1,30 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Http\Middlewares;
+namespace AlexJoffroy\RouteLocalization\Http\Middlewares;
 
 use Closure;
 use Illuminate\Http\Request;
-use AlexJoffroy\LaravelLocalization\LocalizationManager;
+use AlexJoffroy\RouteLocalization\Manager;
+use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
 {
-    /** @var \AlexJoffroy\LaravelLocalization\LocalizationManager */
-    protected $localization;
+    /** @var \AlexJoffroy\RouteLocalization\Manager */
+    protected $manager;
 
-    public function __construct(LocalizationManager $localization)
+    public function __construct(Manager $manager)
     {
-        $this->localization = $localization;
+        $this->manager = $manager;
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         $locale = $request->segment(1, '');
-        if (!$this->localization->isSupportedLocale($locale)) {
-            $locale = $this->localization->getDefaultLocale();
+        if (!$this->manager->isSupportedLocale($locale)) {
+            $locale = $this->manager->getDefaultLocale();
         }
 
-        $this->localization->setLocale($locale);
+        $this->manager->setLocale($locale);
 
         return $next($request);
     }

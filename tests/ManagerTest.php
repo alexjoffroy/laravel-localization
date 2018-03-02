@@ -1,10 +1,10 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Tests;
+namespace AlexJoffroy\RouteLocalization\Tests;
 
-use AlexJoffroy\LaravelLocalization\LocalizationManager;
+use AlexJoffroy\RouteLocalization\Manager;
 
-class LocalizationManagerTest extends TestCase
+class ManagerTest extends TestCase
 {
     protected function setUp()
     {
@@ -24,7 +24,7 @@ class LocalizationManagerTest extends TestCase
     /** @test */
     public function it_can_resolve_the_localization_manager()
     {
-        $this->assertTrue($this->localization instanceof LocalizationManager);
+        $this->assertTrue($this->localization instanceof Manager);
     }
 
     /** @test */

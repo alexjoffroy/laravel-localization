@@ -1,11 +1,11 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization;
+namespace AlexJoffroy\RouteLocalization;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 
-class LocalizationManager
+class Manager
 {
     /** @var \Illuminate\Contracts\Container\Container */
     protected $app;

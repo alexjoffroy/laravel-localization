@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexJoffroy\LaravelLocalization\Tests\Http\Middlewares;
+namespace AlexJoffroy\RouteLocalization\Tests\Http\Middlewares;
 
-use AlexJoffroy\LaravelLocalization\Tests\TestCase;
-use AlexJoffroy\LaravelLocalization\Http\Middlewares\SetLocale;
+use AlexJoffroy\RouteLocalization\Tests\TestCase;
+use AlexJoffroy\RouteLocalization\Http\Middlewares\SetLocale;
 
 class SetLocaleTest extends TestCase
 {
