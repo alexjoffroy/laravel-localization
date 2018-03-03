@@ -1,12 +1,12 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization;
+namespace AlexJoffroy\Localization;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\Contracts\Container\Container;
 
-class RouteLocalization
+class Localization
 {
     /** @var \Illuminate\Contracts\Container\Container */
     protected $app;
@@ -18,7 +18,7 @@ class RouteLocalization
 
     protected function config(string $key)
     {
-        return config("route-localization.$key");
+        return config("localization.$key");
     }
 
     public function getLocale(): string
@@ -101,7 +101,7 @@ class RouteLocalization
         return $url;
     }
 
-    public function renderSwitch(string $view = 'route-localization::switch', array $data = []): HtmlString
+    public function renderSwitch(string $view = 'localization::switch', array $data = []): HtmlString
     {
         return new HtmlString(view($view, array_merge($data, [
             'l10n' => $this,

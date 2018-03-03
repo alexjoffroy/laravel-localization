@@ -6,6 +6,6 @@ if (!function_exists('locales')) {
      */
     function locales()
     {
-        return app('route-localization')->getSupportedLocales();
+        return app('localization')->getSupportedLocales();
     }
 }

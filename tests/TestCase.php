@@ -1,13 +1,13 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization\Tests;
+namespace AlexJoffroy\Localization\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider;
+use AlexJoffroy\Localization\LocalizationServiceProvider;
 
 class TestCase extends OrchestraTestCase
 {
-    /** @var \AlexJoffroy\RouteLocalization\RouteLocalization */
+    /** @var \AlexJoffroy\Localization\Localization */
     protected $localization;
 
     protected $locales = [
@@ -27,12 +27,12 @@ class TestCase extends OrchestraTestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $this->localization = $app['route-localization'];
+        $this->localization = $app['localization'];
         $app->setLocale('en');
 
         $app['config']->set([
-            'route-localization.supported_locales' => $this->locales,
-            'route-localization.default_locale' => 'en'
+            'localization.supported_locales' => $this->locales,
+            'localization.default_locale' => 'en'
         ]);
         
         $app['config']->set('view.paths', [__DIR__ . '/stubs/views']);
@@ -43,6 +43,6 @@ class TestCase extends OrchestraTestCase
 
     protected function getPackageProviders($app): array
     {
-        return [RouteLocalizationServiceProvider::class];
+        return [LocalizationServiceProvider::class];
     }
 }

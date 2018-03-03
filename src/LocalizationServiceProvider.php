@@ -1,36 +1,36 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization;
+namespace AlexJoffroy\Localization;
 
 use Closure;
 use Illuminate\Support\ServiceProvider;
-use AlexJoffroy\RouteLocalization\RouteLocalization;
+use AlexJoffroy\Localization\Localization;
 use Illuminate\Foundation\Events\LocaleUpdated;
-use AlexJoffroy\RouteLocalization\Listeners\AppLocaleUpdated;
+use AlexJoffroy\Localization\Listeners\AppLocaleUpdated;
 
-class RouteLocalizationServiceProvider extends ServiceProvider
+class LocalizationServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/route-localization.php' => config_path('route-localization.php'),
+            __DIR__ . '/../config/localization.php' => config_path('localization.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/route-localization'),
+            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/localization'),
         ], 'views');
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'route-localization');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'localization');
 
         $this->app->events->listen(LocaleUpdated::class, AppLocaleUpdated::class);
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/route-localization.php', 'route-localization');
+        $this->mergeConfigFrom(__DIR__ . '/../config/localization.php', 'localization');
 
-        $this->app->singleton('route-localization', function () {
-            return new RouteLocalization($this->app);
+        $this->app->singleton('localization', function () {
+            return new Localization($this->app);
         });
 
         $this->registerHelpers();

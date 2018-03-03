@@ -2,11 +2,11 @@
 
 # A Laravel package to handle localization from your routes
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-route-localization)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/alexjoffroy/laravel-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-localization)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/alexjoffroy/laravel-route-localization/master.svg?style=flat-square)](https://travis-ci.org/alexjoffroy/laravel-route-localization)
-[![Quality Score](https://img.shields.io/scrutinizer/g/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://scrutinizer-ci.com/g/alexjoffroy/laravel-route-localization)
-[![Total Downloads](https://img.shields.io/packagist/dt/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-route-localization)
+[![Build Status](https://img.shields.io/travis/alexjoffroy/laravel-localization/master.svg?style=flat-square)](https://travis-ci.org/alexjoffroy/laravel-localization)
+[![Quality Score](https://img.shields.io/scrutinizer/g/alexjoffroy/laravel-localization.svg?style=flat-square)](https://scrutinizer-ci.com/g/alexjoffroy/laravel-localization)
+[![Total Downloads](https://img.shields.io/packagist/dt/alexjoffroy/laravel-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-localization)
 
 This Laravel package gives you the ability to simply handle localization in your application. It provides a set of helpers so you can basically do stuff like:
 
@@ -26,7 +26,7 @@ You can still continue to use Laravel core features such as testing, route cachi
 - [Usage](#usage)
     - [Register the middleware](#register-the-middleware)
     - [Add your routes](#add-your-routes)
-    - [The RouteLocalization instance](#the-routelocalization-instance)
+    - [The Localization instance](#the-Localization-instance)
 - [Testing](#testing)
 - [Changelog](#changelog)
 - [Contributing](#contributing)
@@ -40,20 +40,20 @@ You can still continue to use Laravel core features such as testing, route cachi
 You can install the package via composer:
 
 ```bash
-composer require alexjoffroy/laravel-route-localization
+composer require alexjoffroy/laravel-localization
 ```
 
 This package will automatically register itself.
 
-Optionnaly, you can publish the config file `config/route-localization.php`:
+Optionnaly, you can publish the config file `config/localization.php`:
 
 ```bash
-php artisan vendor:publish --provider="AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider --tag="config"
+php artisan vendor:publish --provider="AlexJoffroy\Localization\LocalizationServiceProvider --tag="config"
 ```
 
 If you want to customize the [default switch view](#render-switch):
 ```bash
-php artisan vendor:publish --provider="AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider --tag="views"
+php artisan vendor:publish --provider="AlexJoffroy\Localization\LocalizationServiceProvider --tag="views"
 ```
 
 ## Configuration 
@@ -73,7 +73,7 @@ You can list all locales you want to support here.
 Each key should be a locale code (en, fr, ...).
 
 The `native` field is the label which will be rendered in the switch view.
-`regional_code`, `charset`, and `constants` fields are required to work with [PHP's setlocale](http://php.net/manual/en/function.setlocale.php), which is called in `RouteLocalization::setLocale`. This is useful for stuff like date formatting with Carbon. 
+`regional_code`, `charset`, and `constants` fields are required to work with [PHP's setlocale](http://php.net/manual/en/function.setlocale.php), which is called in `Localization::setLocale`. This is useful for stuff like date formatting with Carbon. 
 
 ```php
 'supported_locales' => [
@@ -121,7 +121,7 @@ The easiest way to do that is to register it globally:
 
 protected $middleware = [
     // ...
-    \AlexJoffroy\RouteLocalization\Http\Middlewares\SetLocale::class,
+    \AlexJoffroy\Localization\Http\Middlewares\SetLocale::class,
 ];
 ```
 
@@ -147,12 +147,12 @@ According you are supporting `en` and `fr` locales and you defined translations 
 | GET HEAD     | en/about    | en.about | App\Http\Controllers\AboutController@index |
 | GET HEAD     | fr/a-propos | fr.about | App\Http\Controllers\AboutController@index |
 
-### The RouteLocalization instance
+### The Localization instance
 
-The `\AlexJoffroy\RouteLocalization\RouteLocalization` class provides a set of methods which could be helpful to use in your app. The object is registered as a singleton and can be accessed from the app container, the `L10n` facade or the `l10n()` helper.
+The `\AlexJoffroy\Localization\Localization` class provides a set of methods which could be helpful to use in your app. The object is registered as a singleton and can be accessed from the app container, the `L10n` facade or the `l10n()` helper.
 
 ```php
-$l10n = app('route-localization');
+$l10n = app('localization');
 // or
 $l10n = L10n::getFacadeRoot();
 // or
@@ -167,7 +167,7 @@ $l10n->getLocale(); // `en`
 
 $l10n->setLocale('fr'); // Set the current locale to `fr`
 ```
-_`RouteLocalization::getLocale` and `RouteLocalization::setLocale` are aliases for `App::getLocale` and `App::setLocale`_
+_`Localization::getLocale` and `Localization::setLocale` are aliases for `App::getLocale` and `App::setLocale`_
 
 #### Checks
 ```php
@@ -229,7 +229,7 @@ $l10n->currentRoute('fr', false); // `/fr/a-propos`
 
 #### Render switch
 
-This should be called in a Blade view like `{{ l10n()->renderSwitch() }}`. When using a custom view, you can directly access the RouteLocalization instance from `$l10n` variable.
+This should be called in a Blade view like `{{ l10n()->renderSwitch() }}`. When using a custom view, you can directly access the Localization instance from `$l10n` variable.
 
 ```php
 // Default view
@@ -255,7 +255,7 @@ Custom view example:
 
 #### Facade
 
-The RouteLocalization methods are also available from the `L10n` facade.
+The Localization methods are also available from the `L10n` facade.
 
 ```php
 L10n::getLocale();
@@ -268,7 +268,7 @@ L10n::currentRoute();
 #### Helpers
 
 ```php
-// Get the RouteLocalization instance
+// Get the Localization instance
 $l10n = l10n(); 
 
 // Get the current locale

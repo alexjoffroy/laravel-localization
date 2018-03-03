@@ -1,10 +1,10 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization\Tests;
+namespace AlexJoffroy\Localization\Tests;
 
-use AlexJoffroy\RouteLocalization\RouteLocalization;
+use AlexJoffroy\Localization\Localization;
 
-class RouteLocalizationTest extends TestCase
+class LocalizationTest extends TestCase
 {
     protected function setUp()
     {
@@ -24,7 +24,7 @@ class RouteLocalizationTest extends TestCase
     /** @test */
     public function it_can_resolve_the_localization_manager()
     {
-        $this->assertTrue($this->localization instanceof RouteLocalization);
+        $this->assertTrue($this->localization instanceof Localization);
     }
 
     /** @test */
@@ -146,7 +146,7 @@ class RouteLocalizationTest extends TestCase
     {
         $this->get('/en/posts/123');
 
-        $html = view('route-localization::switch', ['l10n' => $this->localization])->render();
+        $html = view('localization::switch', ['l10n' => $this->localization])->render();
 
         $this->assertEquals($html, $this->localization->renderSwitch());
     }

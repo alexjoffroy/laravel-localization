@@ -1,18 +1,18 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization\Http\Middlewares;
+namespace AlexJoffroy\Localization\Http\Middlewares;
 
 use Closure;
 use Illuminate\Http\Request;
-use AlexJoffroy\RouteLocalization\RouteLocalization;
+use AlexJoffroy\Localization\Localization;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
 {
-    /** @var \AlexJoffroy\RouteLocalization\RouteLocalization */
+    /** @var \AlexJoffroy\Localization\Localization */
     protected $localization;
 
-    public function __construct(RouteLocalization $localization)
+    public function __construct(Localization $localization)
     {
         $this->localization = $localization;
     }

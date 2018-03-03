@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization\Tests\Http\Middlewares;
+namespace AlexJoffroy\Localization\Tests\Http\Middlewares;
 
-use AlexJoffroy\RouteLocalization\Tests\TestCase;
-use AlexJoffroy\RouteLocalization\Http\Middlewares\SetLocale;
+use AlexJoffroy\Localization\Tests\TestCase;
+use AlexJoffroy\Localization\Http\Middlewares\SetLocale;
 
 class SetLocaleTest extends TestCase
 {

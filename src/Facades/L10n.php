@@ -1,16 +1,16 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization\Facades;
+namespace AlexJoffroy\Localization\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \AlexJoffroy\RouteLocalization\RouteLocalization
+ * @see \AlexJoffroy\Localization\Localization
  */
 class L10n extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'route-localization';
+        return 'localization';
     }
 }

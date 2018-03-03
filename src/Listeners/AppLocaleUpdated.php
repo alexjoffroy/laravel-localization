@@ -1,16 +1,16 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization\Listeners;
+namespace AlexJoffroy\Localization\Listeners;
 
 use Illuminate\Foundation\Events\LocaleUpdated;
-use AlexJoffroy\RouteLocalization\RouteLocalization;
+use AlexJoffroy\Localization\Localization;
 
 class AppLocaleUpdated
 {
-    /** @var \AlexJoffroy\RouteLocalization\RouteLocalization */
+    /** @var \AlexJoffroy\Localization\Localization */
     protected $localization;
     
-    public function __construct(RouteLocalization $localization)
+    public function __construct(Localization $localization)
     {
         $this->localization = $localization;
     }

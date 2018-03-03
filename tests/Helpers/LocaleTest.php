@@ -1,8 +1,8 @@
 <?php
 
-namespace AlexJoffroy\RouteLocalization\Tests\Helpers;
+namespace AlexJoffroy\Localization\Tests\Helpers;
 
-use AlexJoffroy\RouteLocalization\Tests\TestCase;
+use AlexJoffroy\Localization\Tests\TestCase;
 
 class LocaleTest extends TestCase
 {
