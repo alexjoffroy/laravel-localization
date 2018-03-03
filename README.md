@@ -1,6 +1,6 @@
 **_Currently in active development, first release coming soon_**
 
-# A Laravel package to handle localization with ease
+# A Laravel package to handle localization from your routes
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-route-localization)
 [![Build Status](https://img.shields.io/travis/alexjoffroy/laravel-route-localization/master.svg?style=flat-square)](https://travis-ci.org/alexjoffroy/laravel-route-localization)
@@ -15,7 +15,7 @@ GET /en/about # Displays the about page in english
 GET /fr/a-propos # Displays the about page in french
 ```
 
-You can still continue to use core features such as testing, route caching, lang files, ... 
+You can still continue to use Laravel core features such as testing, route caching, lang files, ... 
 
 ## Table of content
 - [Installation](#installation)
@@ -26,7 +26,7 @@ You can still continue to use core features such as testing, route caching, lang
 - [Usage](#usage)
     - [Register the middleware](#register-the-middleware)
     - [Add your routes](#add-your-routes)
-    - [API](#api)
+    - [The RouteLocalization instance](#the-routelocalization-instance)
 - [Testing](#testing)
 - [Changelog](#changelog)
 - [Contributing](#contributing)
@@ -89,16 +89,27 @@ The `native` field is the label which will be rendered in the switch view.
 
 ### Hide default locale in url
 
-By default, the package will prefix all URLs with the locale. Set this value to true, allows the package to remove this prefix for the default locale.
+By default, all URLs will be prefixed with the locale. 
+```bash
+# `en` is default locale
+GET /en/about # Displays the about page in english
+GET /fr/a-propos # Displays the about page in french
+```
+When setting `hide_default_locale_in_url` to true, this prefix will be removed for the default locale.
 
 ```php
 'hide_default_locale_in_url' => false,
+```
+```bash
+# `en` is default locale
+GET /about # Displays the about page in english
+GET /fr/a-propos # Displays the about page in french
 ```
 
 ## Usage
 
 ### Register the middleware
-The first step is to register the `SetLocale` middleware to your app. This middleware will guess and set the current locale from the URL. 
+The first step is to register the `SetLocale` middleware into your app. This middleware will guess and set the current locale from the URL. 
 The easiest way to do that is to register it globally:
 ```php
 // app/Http/Kernel.php
@@ -122,7 +133,7 @@ Route::locales(function() {
 });
 ```
 
-> Warning: all routes defined inside the `locales` group should be named.
+**_Warning: all routes defined inside the `locales` group should be named._**
 
 According you are supporting `en` and `fr` locales and you defined translations for `routes.about`, the above code will register these routes:
 
@@ -131,54 +142,110 @@ According you are supporting `en` and `fr` locales and you defined translations 
 | GET HEAD     | en/about    | en.about | App\Http\Controllers\AboutController@index |
 | GET HEAD     | fr/a-propos | fr.about | App\Http\Controllers\AboutController@index |
 
-### API
+### The RouteLocalization instance
 
-#### RouteLocalization
-
-The `\AlexJoffroy\RouteLocalization\RouteLocalization` class provides a set of methods which could be helpful to use in your app. The object is registered as singleton and can be accessed form the app container, the `L10n` facade or `l10n()` helper.
+The `\AlexJoffroy\RouteLocalization\RouteLocalization` class provides a set of methods which could be helpful to use in your app. The object is registered as a singleton and can be accessed from the app container, the `L10n` facade or the `l10n()` helper.
 
 ```php
 $l10n = app('route-localization');
+// or
+$l10n = L10n::getFacadeRoot();
+// or
+$l10n = l10n();
+```
 
-$l10n->getLocale(); // Get the current locale
+#### Get/Set locale
+```php
+// Given `en` is the current locale
 
-$l10n->setLocale('en'); // Set the current locale to `fr`
+$l10n->getLocale(); // `en`
 
-$l10n->isCurrentLocale('en'); // Return true
+$l10n->setLocale('fr'); // Set the current locale to `fr`
+```
+_`RouteLocalization::getLocale` and `RouteLocalization::setLocale` are aliases for `App::getLocale` and `App::setLocale`_
 
-$l10n->isCurrentLocale('not-current'); // Return false
+#### Checks
+```php
+// Given `en` is the current locale
 
-$l10n->getSupportedLocales(); // Return config value (supported_locales)
+$l10n->isCurrentLocale('en'); // true
 
-$l10n->getSupportedLocale('en'); // Return config value for specific locale
+$l10n->isCurrentLocale('not-current'); // false
 
-$l10n->getSupportedLocaleKeys(); // Return ['en', 'fr']
 
-$l10n->isSupportedLocale('en'); // Return true
+$l10n->isSupportedLocale('en'); // true
 
-$l10n->isSupportedLocale('not-supported'); // Return false
+$l10n->isSupportedLocale('not-supported'); // false
 
-$l10n->getDefaultLocale(); // Return the default locale set in `config/route-localization.php`
 
-$l10n->isDefaultLocale('en'); // Return true
+// Given `en` is the default locale
 
-$l10n->isDefaultLocale('not-default'); // Return false
+$l10n->isDefaultLocale('en'); // true
 
-$l10n->shouldHideLocaleInUrl('en'); // Return true if `hide_locale_in_url` is set to true in `config/route-localization.php`
+$l10n->isDefaultLocale('not-default'); // false
+```
 
-$l10n->route('about', [], true, 'en'); // Return `https://yourapp.dev/en/about`
+#### Get config values
+```php
+$l10n->getSupportedLocales(); // All supported locales (from supported_locales)
 
-$l10n->route('about', [], false, 'en'); // Return `/en/about`
+$l10n->getSupportedLocale('en'); // Given supported locale (from supported_locales)
 
-$l10n->route('about', [], true, 'fr'); // Return `https://yourapp.dev/fr/a-propos`
+$l10n->getSupportedLocaleKeys(); // All supported locale keys (from supported_locales)
+
+$l10n->getDefaultLocale(); // Default locale (from default_locale)
+
+
+// Given `en` is the default locale
+
+$l10n->shouldHideLocaleInUrl('en'); // True if `hide_default_locale_in_url` is true 
+
+$l10n->shouldHideLocaleInUrl('fr'); // False, even if `hide_default_locale_in_url` is true 
+```
+
+#### Generate routes
+```php
+$l10n->route('about', [], true, 'en'); // `https://yourapp.com/en/about`
+
+$l10n->route('about', [], false, 'en'); // `/en/about`
+
+$l10n->route('about', [], true, 'fr'); // `https://yourapp.com/fr/a-propos`
 
 // Shortcut will fallback to current locale
-$l10n->route('about'); // Return `https://yourapp.dev/en/about` 
+$l10n->route('about'); // `https://yourapp.com/en/about` 
 
-// Current app url is `https://yourapp.dev/en/about`
-$l10n->currentRoute('fr'); // Return `https://yourapp.dev/fr/a-propos`
 
-$l10n->currentRoute('fr', false); // Return `/fr/a-propos`
+// Given the current app url is `https://yourapp.com/en/about`
+
+$l10n->currentRoute('fr'); // `https://yourapp.com/fr/a-propos`
+
+$l10n->currentRoute('fr', false); // `/fr/a-propos`
+```
+
+#### Render switch
+
+This should be called in a Blade view like `{{ l10n()->renderSwitch() }}`. When using a custom view, you can directly access the RouteLocalization instance from `$l10n` variable.
+
+```php
+// Default view
+$l10n->renderSwitch();
+
+// Custom view
+$l10n->renderSwitch('path.to.view');
+
+// Custom view, with additional data
+$l10n->renderSwitch('path.to.view', ['foo' => 'bar']);
+```
+
+Custom view example:
+```blade
+<select name="switch" id="switch">
+    @foreach($l10n->getSupportedLocales() as $locale => $localeSettings)    
+        <option value="{{ $locale }}" {{ $l10n->isCurrentLocale($locale) ? 'selected' : '' }}>
+            {{ ucfirst($localeSettings['native']) }}
+        </option>
+    @endforeach
+</select>
 ```
 
 #### Facade
