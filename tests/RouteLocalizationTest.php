@@ -140,4 +140,24 @@ class RouteLocalizationTest extends TestCase
         $this->assertEquals(url('/en/posts/123?foo=bar'), $this->localization->currentRoute('en'));
         $this->assertEquals('/en/posts/123?foo=bar', $this->localization->currentRoute('en', false));
     }
+
+    /** @test */
+    public function it_can_render_the_switch_view()
+    {
+        $this->get('/en/posts/123');
+
+        $html = view('route-localization::switch', ['l10n' => $this->localization])->render();
+
+        $this->assertEquals($html, $this->localization->renderSwitch());
+    }
+
+    /** @test */
+    public function it_can_render_a_custom_switch_view()
+    {
+        $this->get('/en/posts/123');
+
+        $html = view('switch', ['l10n' => $this->localization])->render();
+
+        $this->assertEquals($html, $this->localization->renderSwitch('switch'));
+    }
 }

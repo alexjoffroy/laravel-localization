@@ -2,8 +2,9 @@
 
 namespace AlexJoffroy\RouteLocalization;
 
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
+use Illuminate\Contracts\Container\Container;
 
 class RouteLocalization
 {
@@ -98,5 +99,12 @@ class RouteLocalization
         }
 
         return $url;
+    }
+
+    public function renderSwitch(string $view = 'route-localization::switch', array $data = []): HtmlString
+    {
+        return new HtmlString(view($view, array_merge($data, [
+            'l10n' => $this,
+        ]))->render());
     }
 }

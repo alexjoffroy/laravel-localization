@@ -25,19 +25,20 @@ class TestCase extends OrchestraTestCase
         ],
     ];
 
-    protected function setUp()
+    protected function getEnvironmentSetUp($app)
     {
-        parent::setUp();
+        $this->localization = $app['route-localization'];
+        $app->setLocale('en');
 
-        $this->localization = $this->app['route-localization'];
-        $this->app->setLocale('en');
-
-        $this->app['config']->set([
+        $app['config']->set([
             'route-localization.supported_locales' => $this->locales,
             'route-localization.default_locale' => 'en'
         ]);
-        $this->app['translator']->addLines(['routes.posts' => 'posts'], 'en');
-        $this->app['translator']->addLines(['routes.posts' => 'articles'], 'fr');
+        
+        $app['config']->set('view.paths', [__DIR__ . '/stubs/views']);
+        
+        $app['translator']->addLines(['routes.posts' => 'posts'], 'en');
+        $app['translator']->addLines(['routes.posts' => 'articles'], 'fr');
     }
 
     protected function getPackageProviders($app): array

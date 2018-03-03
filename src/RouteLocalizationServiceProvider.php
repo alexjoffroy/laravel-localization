@@ -16,6 +16,12 @@ class RouteLocalizationServiceProvider extends ServiceProvider
             __DIR__ . '/../config/route-localization.php' => config_path('route-localization.php'),
         ], 'config');
 
+        $this->publishes([
+            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/route-localization'),
+        ], 'views');
+
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'route-localization');
+
         $this->app->events->listen(LocaleUpdated::class, AppLocaleUpdated::class);
     }
 
