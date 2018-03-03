@@ -3,8 +3,8 @@
 # A Laravel package to handle localization from your routes
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-route-localization)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/alexjoffroy/laravel-route-localization/master.svg?style=flat-square)](https://travis-ci.org/alexjoffroy/laravel-route-localization)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/xxxxxxxxx.svg?style=flat-square)](https://insight.sensiolabs.com/projects/xxxxxxxxx)
 [![Quality Score](https://img.shields.io/scrutinizer/g/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://scrutinizer-ci.com/g/alexjoffroy/laravel-route-localization)
 [![Total Downloads](https://img.shields.io/packagist/dt/alexjoffroy/laravel-route-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-route-localization)
 
@@ -43,15 +43,20 @@ You can install the package via composer:
 composer require alexjoffroy/laravel-route-localization
 ```
 
-## Configuration 
+This package will automatically register itself.
 
-This package will automatically register service provider and facade.
-
-To publish the config file `config/route-localization.php` run
+Optionnaly, you can publish the config file `config/route-localization.php`:
 
 ```bash
-php artisan vendor:publish --provider="AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider"
+php artisan vendor:publish --provider="AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider --tag="config"
 ```
+
+If you want to customize the [default switch view](#render-switch):
+```bash
+php artisan vendor:publish --provider="AlexJoffroy\RouteLocalization\RouteLocalizationServiceProvider --tag="views"
+```
+
+## Configuration 
 
 ### Default locale
 
