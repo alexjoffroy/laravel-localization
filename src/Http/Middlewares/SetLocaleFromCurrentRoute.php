@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use AlexJoffroy\Localization\Localization;
 use Symfony\Component\HttpFoundation\Response;
 
-class SetLocale
+class SetLocaleFromCurrentRoute
 {
     /** @var \AlexJoffroy\Localization\Localization */
     protected $localization;

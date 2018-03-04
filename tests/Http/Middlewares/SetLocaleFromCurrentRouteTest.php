@@ -3,15 +3,15 @@
 namespace AlexJoffroy\Localization\Tests\Http\Middlewares;
 
 use AlexJoffroy\Localization\Tests\TestCase;
-use AlexJoffroy\Localization\Http\Middlewares\SetLocale;
+use AlexJoffroy\Localization\Http\Middlewares\SetLocaleFromCurrentRoute;
 
-class SetLocaleTest extends TestCase
+class SetLocaleFromCurrentRouteTest extends TestCase
 {
     public function setUp()
     {
         parent::setup();
 
-        $this->app->make('Illuminate\Contracts\Http\Kernel')->pushMiddleware(SetLocale::class);
+        $this->app->make('Illuminate\Contracts\Http\Kernel')->pushMiddleware(SetLocaleFromCurrentRoute::class);
     }
     /** @test */
     public function it_set_the_locale_from_the_current_url()

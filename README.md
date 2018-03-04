@@ -114,14 +114,14 @@ GET /fr/a-propos # Displays the about page in french
 ## Usage
 
 ### Register the middleware
-The first step is to register the `SetLocale` middleware into your app. This middleware will guess and set the current locale from the URL. 
+The first step is to register the `SetLocaleFromCurrentRoute` middleware into your app. This middleware will guess and set the current locale from the URL. 
 The easiest way to do that is to register it globally:
 ```php
 // app/Http/Kernel.php
 
 protected $middleware = [
     // ...
-    \AlexJoffroy\Localization\Http\Middlewares\SetLocale::class,
+    \AlexJoffroy\Localization\Http\Middlewares\SetLocaleFromCurrentRoute::class,
 ];
 ```
 
