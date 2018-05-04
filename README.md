@@ -3,6 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/alexjoffroy/laravel-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-localization)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/alexjoffroy/laravel-localization/master.svg?style=flat-square)](https://travis-ci.org/alexjoffroy/laravel-localization)
+[![Code Coverage](https://scrutinizer-ci.com/g/alexjoffroy/laravel-localization/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/alexjoffroy/laravel-localization/?branch=master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/alexjoffroy/laravel-localization.svg?style=flat-square)](https://scrutinizer-ci.com/g/alexjoffroy/laravel-localization)
 [![Total Downloads](https://img.shields.io/packagist/dt/alexjoffroy/laravel-localization.svg?style=flat-square)](https://packagist.org/packages/alexjoffroy/laravel-localization)
 
