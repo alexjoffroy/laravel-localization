@@ -17,3 +17,15 @@ checks:
         fix_identation_4spaces: true
         fix_doc_comments: true
 
+build:
+    dependencies:
+        after:
+            - 'sudo locale-gen fr_FR.UTF-8'
+            - 'sudo update-locale'
+    tests:
+        override:
+            -
+                command: 'php vendor/bin/phpunit --coverage-clover=coverage.clover'
+                coverage:
+                    file: 'coverage.clover'
+                    format: 'clover'
