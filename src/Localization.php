@@ -2,9 +2,9 @@
 
 namespace AlexJoffroy\Localization;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
-use Illuminate\Contracts\Container\Container;
 
 class Localization
 {

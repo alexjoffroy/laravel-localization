@@ -2,11 +2,10 @@
 
 namespace AlexJoffroy\Localization;
 
-use Closure;
-use Illuminate\Support\ServiceProvider;
+use AlexJoffroy\Localization\Listeners\AppLocaleUpdated;
 use AlexJoffroy\Localization\Localization;
 use Illuminate\Foundation\Events\LocaleUpdated;
-use AlexJoffroy\Localization\Listeners\AppLocaleUpdated;
+use Illuminate\Support\ServiceProvider;
 
 class LocalizationServiceProvider extends ServiceProvider
 {
