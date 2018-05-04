@@ -53,6 +53,13 @@ class LocalizationTest extends TestCase
     }
     
     /** @test */
+    public function it_can_get_a_supported_locale()
+    {
+        $this->assertEquals(collect($this->locales['en']), $this->localization->getSupportedLocale('en'));
+        $this->assertEquals(collect(), $this->localization->getSupportedLocale('not-supported'));
+    }
+    
+    /** @test */
     public function it_can_get_the_supported_locales()
     {
         $this->assertEquals(collect($this->locales), $this->localization->getSupportedLocales());
