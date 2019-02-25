@@ -41,15 +41,15 @@ class Localization
         $locales = $this->getSupportedLocales();
 
         if ($locales->has($locale)) {
-            return collect($locales->get($locale));
+            return new Collection($locales->get($locale));
         }
 
-        return collect([]);
+        return new Collection([]);
     }
     
     public function getSupportedLocales(): Collection
     {
-        return collect($this->config('supported_locales'));
+        return new Collection($this->config('supported_locales'));
     }
 
     public function getSupportedLocalesKeys(): Collection
