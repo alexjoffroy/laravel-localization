@@ -29,11 +29,8 @@ class LocalizationServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/localization.php', 'localization');
 
-        $this->app->bind(Strategy::class, function () {
-            $strategy = $this->app->config->get('localization.strategy');
-
-            return new $strategy;
-        });
+        $strategy = $this->app->config->get('localization.strategy');
+        $this->app->bind(Strategy::class, $strategy);
         
         $this->app->singleton(Localization::class, function () {
             return new Localization($this->app);

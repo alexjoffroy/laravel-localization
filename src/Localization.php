@@ -16,7 +16,7 @@ class Localization
         $this->app = $app;
     }
 
-    protected function config(string $key)
+    public function config(string $key)
     {
         return $this->app->config->get("localization.$key");
     }
@@ -70,12 +70,6 @@ class Localization
     public function isDefaultLocale(string $locale = ''): bool
     {
         return $locale === $this->getDefaultLocale();
-    }
-
-    public function shouldHideLocaleInUrl($locale)
-    {
-        return $this->config('hide_default_locale_in_url')
-            && $this->isDefaultLocale($locale);
     }
 
     public function route(string $name, array $parameters = [], bool $absolute = true, string $locale = ''): string
