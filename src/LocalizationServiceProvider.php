@@ -29,7 +29,7 @@ class LocalizationServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/localization.php', 'localization');
 
-        $strategy = $this->app->config->get('localization.strategy');
+        $strategy = $this->app->config->get('localization.strategy.class');
         $this->app->bind(Strategy::class, $strategy);
         
         $this->app->singleton(Localization::class, function () {

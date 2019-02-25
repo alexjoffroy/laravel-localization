@@ -39,7 +39,7 @@ class FromUrlPrefix implements Strategy
 
     private function shouldHideLocaleInUrl($locale): bool
     {
-        return $this->localization->config('hide_default_locale_in_url')
+        return $this->localization->config('strategy.options.hide_default_locale_in_url')
             && $this->localization->isDefaultLocale($locale);
     }
 }

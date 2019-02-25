@@ -6,8 +6,6 @@ return[
 
     'default_locale' => config('app.fallback_locale'),
 
-    'strategy' => FromUrlPrefix::class,
-
     'supported_locales' => [
         'en' => [
             'native' => 'English',
@@ -23,6 +21,13 @@ return[
         ],
     ],
 
-    'hide_default_locale_in_url' => false,
+    'strategy' => [
+        'class' => FromUrlPrefix::class,
+
+        'options' => [
+            'hide_default_locale_in_url' => false,
+        ]
+    ],
+
     
 ];

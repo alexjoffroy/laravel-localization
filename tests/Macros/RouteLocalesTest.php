@@ -34,7 +34,7 @@ class RouteLocalesTest extends TestCase
     /** @test */
     public function it_can_hide_the_default_locale_from_the_url()
     {
-        config(['localization.hide_default_locale_in_url' => true]);
+        config(['localization.strategy.options.hide_default_locale_in_url' => true]);
         $router = $this->app['router'];
         $router->locales(function () use ($router) {
             $router->get(trans('routes.posts') . "/{id}", [
