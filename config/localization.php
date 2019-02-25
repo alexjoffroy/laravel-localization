@@ -1,8 +1,12 @@
 <?php
 
+use AlexJoffroy\Localization\Strategies\FromUrlPrefix;
+
 return[
 
     'default_locale' => config('app.fallback_locale'),
+
+    'strategy' => FromUrlPrefix::class,
 
     'supported_locales' => [
         'en' => [

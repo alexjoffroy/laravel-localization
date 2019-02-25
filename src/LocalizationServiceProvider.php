@@ -2,10 +2,11 @@
 
 namespace AlexJoffroy\Localization;
 
-use AlexJoffroy\Localization\Listeners\AppLocaleUpdated;
+use Illuminate\Support\ServiceProvider;
 use AlexJoffroy\Localization\Localization;
 use Illuminate\Foundation\Events\LocaleUpdated;
-use Illuminate\Support\ServiceProvider;
+use AlexJoffroy\Localization\Strategies\Strategy;
+use AlexJoffroy\Localization\Listeners\AppLocaleUpdated;
 
 class LocalizationServiceProvider extends ServiceProvider
 {
@@ -28,11 +29,20 @@ class LocalizationServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/localization.php', 'localization');
 
-        $this->app->singleton('localization', function () {
+        $this->app->bind(Strategy::class, function () {
+            $strategy = $this->app->config->get('localization.strategy');
+
+            return new $strategy;
+        });
+        
+        $this->app->singleton(Localization::class, function () {
             return new Localization($this->app);
         });
 
+        $this->app->alias(Localization::class, 'localization');
+
         $this->registerHelpers();
+
         $this->registerMacros();
     }
 
