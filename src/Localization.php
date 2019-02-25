@@ -18,7 +18,7 @@ class Localization
 
     protected function config(string $key)
     {
-        return config("localization.$key");
+        return $this->app->config->get("localization.$key");
     }
 
     public function getLocale(): string
