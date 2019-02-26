@@ -1,14 +1,15 @@
 <?php
 
-namespace AlexJoffroy\Localization\Strategies;
+namespace AlexJoffroy\Localization\Tests\Strategies;
 
-use Illuminate\Http\Request;
 use AlexJoffroy\Localization\Tests\TestCase;
 use AlexJoffroy\Localization\Strategies\FromUrlPrefix;
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use AlexJoffroy\Localization\Tests\Concerns\CreatesRequest;
 
 class FromUrlPrefixTest extends TestCase
 {
+    use CreatesRequest;
+    
     /** @test */
     public function it_can_determine_locale()
     {
@@ -19,27 +20,5 @@ class FromUrlPrefixTest extends TestCase
 
         $request = $this->createRequest('GET', null, '/fr/posts');
         $this->assertEquals('fr', $strategy->determineLocale($request));
-    }
-
-    private function createRequest(
-        $method = 'GET',
-        $content = null,
-        $uri = '/',
-        $server = [],
-        $parameters = [],
-        $cookies = [],
-        $files = []
-    ) {
-        return (new Request)->createFromBase(
-            SymfonyRequest::create(
-                $uri,
-                $method,
-                $parameters,
-                $cookies,
-                $files,
-                $server,
-                $content
-            )
-        );
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use AlexJoffroy\Localization\Strategies\FromDomain;
 use AlexJoffroy\Localization\Strategies\FromUrlPrefix;
 
 return[
@@ -27,6 +28,15 @@ return[
         'options' => [
             'hide_default_locale_in_url' => false,
         ]
+
+        // 'class' => FromDomain::class,
+
+        // 'options' => [
+        //     'domains' => [
+        //         'fr' => 'nasexpert.test',
+        //         'en' => 'nasexpert-en.test',
+        //     ]
+        // ]
     ],
 
     
