@@ -94,47 +94,6 @@ class LocalizationTest extends TestCase
     }
 
     /** @test */
-    public function it_can_generate_a_localized_route()
-    {
-        $this->assertEquals(url('/en/posts/123'), $this->localization->route('posts.show', ['id' => 123], true, 'en'));
-        $this->assertEquals('/en/posts/123', $this->localization->route('posts.show', ['id' => 123], false, 'en'));
-        $this->assertEquals(url('/fr/articles/123'), $this->localization->route('posts.show', ['id' => 123], true, 'fr'));
-        $this->assertEquals('/fr/articles/123', $this->localization->route('posts.show', ['id' => 123], false, 'fr'));
-    }
-
-    /** @test */
-    public function it_can_generate_a_localized_route_guessing_the_current_locale()
-    {
-        $this->localization->setLocale('en');
-        $this->assertEquals(url('/en/posts/123'), $this->localization->route('posts.show', ['id' => 123], true));
-        $this->assertEquals('/en/posts/123', $this->localization->route('posts.show', ['id' => 123], false));
-
-        $this->localization->setLocale('fr');
-        $this->assertEquals(url('/fr/articles/123'), $this->localization->route('posts.show', ['id' => 123], true));
-        $this->assertEquals('/fr/articles/123', $this->localization->route('posts.show', ['id' => 123], false));
-    }
-
-    /** @test */
-    public function it_can_generate_a_localized_route_from_a_not_supported_locale()
-    {
-        $this->localization->setLocale('en');
-        $this->assertEquals(url('/en/posts/123'), $this->localization->route('posts.show', ['id' => 123], true, 'not-supported'));
-        $this->assertEquals('/en/posts/123', $this->localization->route('posts.show', ['id' => 123], false, 'not-supported'));
-
-        $this->localization->setLocale('fr');
-        $this->assertEquals(url('/fr/articles/123'), $this->localization->route('posts.show', ['id' => 123], true, 'not-supported'));
-        $this->assertEquals('/fr/articles/123', $this->localization->route('posts.show', ['id' => 123], false, 'not-supported'));
-    }
-
-    /** @test */
-    public function it_can_generate_a_localized_route_from_a_localized_route_name()
-    {
-        $this->localization->setLocale('en');
-        $this->assertEquals(url('/fr/articles/123'), $this->localization->route('en.posts.show', ['id' => 123], true, 'fr'));
-        $this->assertEquals('/fr/articles/123', $this->localization->route('en.posts.show', ['id' => 123], false, 'fr'));
-    }
-
-    /** @test */
     public function it_can_switch_locale_from_current_route()
     {
         $this->get('/en/posts/123?foo=bar');
