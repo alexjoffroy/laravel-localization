@@ -27,8 +27,8 @@ class RouteLocalesTest extends TestCase
         
         $this->assertTrue($router->has('en.posts.show'));
         $this->assertTrue($router->has('fr.posts.show'));
-        $this->assertEquals('/en/posts/123?foo=bar', route('en.posts.show', ['id' => 123, 'foo' => 'bar'], false));
-        $this->assertEquals('/fr/articles/123?foo=bar', route('fr.posts.show', ['id' => 123, 'foo' => 'bar'], false));
+        $this->assertEquals('/en/posts/123?foo=bar', $this->app->url->route('posts.show', ['id' => 123, 'foo' => 'bar'], false, 'en'));
+        $this->assertEquals('/fr/articles/123?foo=bar', $this->app->url->route('posts.show', ['id' => 123, 'foo' => 'bar'], false, 'fr'));
     }
 
     /** @test */
@@ -47,7 +47,7 @@ class RouteLocalesTest extends TestCase
 
         $this->assertTrue($router->has('en.posts.show'));
         $this->assertTrue($router->has('fr.posts.show'));
-        $this->assertEquals('/posts/123?foo=bar', route('en.posts.show', ['id' => 123, 'foo' => 'bar'], false));
-        $this->assertEquals('/fr/articles/123?foo=bar', route('fr.posts.show', ['id' => 123, 'foo' => 'bar'], false));
+        $this->assertEquals('/posts/123?foo=bar', $this->app->url->route('posts.show', ['id' => 123, 'foo' => 'bar'], false, 'en'));
+        $this->assertEquals('/fr/articles/123?foo=bar', $this->app->url->route('posts.show', ['id' => 123, 'foo' => 'bar'], false, 'fr'));
     }
 }

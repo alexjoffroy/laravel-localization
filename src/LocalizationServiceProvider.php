@@ -6,7 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use AlexJoffroy\Localization\Localization;
 use Illuminate\Foundation\Events\LocaleUpdated;
 use AlexJoffroy\Localization\Strategies\Strategy;
+use AlexJoffroy\Localization\Routing\UrlGenerator;
 use AlexJoffroy\Localization\Listeners\AppLocaleUpdated;
+use Illuminate\Contracts\Routing\UrlGenerator as UrlGeneratorContract;
 
 class LocalizationServiceProvider extends ServiceProvider
 {
@@ -38,11 +40,19 @@ class LocalizationServiceProvider extends ServiceProvider
 
         $this->app->alias(Localization::class, 'localization');
 
+        $this->app->extend(UrlGeneratorContract::class, function () {
+            return new UrlGenerator(
+                $this->app->router->getRoutes(),
+                $this->app->request,
+                $this->app->localization
+            );
+        });
+
         $this->registerHelpers();
 
         $this->registerMacros();
     }
-
+    
     public function registerHelpers()
     {
         require_once __DIR__ . '/Helpers/l10n.php';
